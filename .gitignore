@@ -46,3 +46,5 @@ Thumbs.db
 ##########
 db.sqlite3
 __pycache__
+htmlcov
+.coverage
