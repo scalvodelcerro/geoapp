@@ -45,3 +45,4 @@ Thumbs.db
 # Django #
 ##########
 db.sqlite3
+__pycache__
