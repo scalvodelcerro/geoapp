@@ -1,0 +1,12 @@
+{% extends 'mapviewer/base.html' %}
+{% load i18n %}
+
+
+{% block content %}
+  <h2>{% trans "Registro de usuario" %}:</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-outline-success">{% trans "Aceptar" %}</button>
+  </form>
+{% endblock %}

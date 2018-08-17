@@ -1,0 +1,105 @@
+{% extends 'mapviewer/base.html' %}
+{% load i18n %}
+
+
+{% block content %}
+	<div class="buscador-yacimientos d-flex">
+		<nav id="buscador-sidebar">
+			<h3>{% trans "Filtros de búsqueda" %}</h3>
+			<ul class="list-unstyled">
+				<li>
+					<span>{% trans "Nombre" %}:</span>
+					<input type="text" id="filtro_nombre" />
+				</li>
+				<li>
+					<a data-toggle="collapse" href="#lista-tipos-yacimiento" role="button" aria-expanded="true" class="dropdown-toggle">
+				    	{% trans "Tipo de yacimiento" %} 
+					</a>
+					<ul class="collapse show list-unstyled" id="lista-tipos-yacimiento">
+						{% for tipo_yacimento in tipos_yacimento %}
+							<li>
+								<input type="checkbox" id="tipo-yacimiento-{{ tipo_yacimento.pk }}" name="tipo-yacimiento[]" value="{{ tipo_yacimento.pk }}" />
+								<label for="tipo-yacimiento-{{ tipo_yacimento.pk }}">{{ tipo_yacimento.nombre }}</label>
+							</li>
+						{% endfor %}
+					</ul>
+				</li>
+				<li>
+					<a data-toggle="collapse" href="#lista-tipos-fase-historica" role="button" aria-expanded="true" class="dropdown-toggle">
+				    	{% trans "Fase histórica" %} 
+					</a>
+					<ul class="collapse show list-unstyled" id="lista-tipos-fase-historica">
+						{% for tipo_fase_historica in tipos_fase_historica %}
+							<li>
+								<input type="checkbox" id="tipo-fase-historica-{{ tipo_fase_historica.pk }}" name="tipo-fase-historica[]" value="{{ tipo_fase_historica.pk }}" />
+								<label for="tipo-fase-historica-{{ tipo_fase_historica.pk }}">{{ tipo_fase_historica.nombre }}</label>
+							</li>
+						{% endfor %}
+					</ul>
+				</li>
+				<li>
+					<button type="button" class="btn btn-primary mx-auto">{% trans "Buscar" %}</button>
+				</li>
+			</ul>
+		</nav>
+		<div id="buscador-resultados" class="flex-grow-1">
+			<h2>{% trans "Buscador de yacimientos" %}</h2>
+			<div id="map" class="map"></div>
+		</div>
+	</div>
+	<script
+		src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script
+		src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.1.3/build/ol.js"></script>
+	<script>
+		var vectorSource = new ol.source.Vector();
+		vectorSource.on('change', function(evt){
+			if (vectorSource.getState() === 'ready') {
+				if (vectorSource.getFeatures().length > 0) {
+					map.getView().fit(vectorSource.getExtent(), map.getSize());
+				}
+			}
+		});
+		var styleFunction = function(feature) {
+			if (feature.getGeometry().getType() == 'Polygon') {
+				return new ol.style.Style({
+					stroke :  new ol.style.Stroke({
+						color : 'darkgreen',
+						width : 2
+					}),
+					fill : new ol.style.Fill({
+						color : [0, 200, 0, 0.4]
+					}),
+				});
+			} else if (feature.getGeometry().getType() == 'Point') {
+				return new ol.style.Style({
+					image: new ol.style.Circle(/** @type {olx.style.IconOptions} */ ({
+		 				stroke : new ol.style.Stroke({
+		 					color : 'darkred'
+		 				}),	
+		 				fill : new ol.style.Fill({
+		 					color : 'red'
+		 				}),
+		 				radius : 4,
+		 			}))
+				});
+			}
+		};
+		var map = new ol.Map({
+			target : 'map',
+			layers : [
+				new ol.layer.Tile({
+					source : new ol.source.OSM()
+				}),
+				new ol.layer.Vector({
+					source: vectorSource,
+					style: styleFunction
+				}),
+			],
+			view: new ol.View({
+				center: ol.proj.transform([-3.8196207, 36.4378698], 'EPSG:4326', 'EPSG:3857'),
+		        zoom: 5,
+		    })
+		});
+	</script>
+{% endblock %}

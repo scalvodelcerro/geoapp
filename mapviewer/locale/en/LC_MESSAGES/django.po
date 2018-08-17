@@ -1,0 +1,93 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-27 14:38+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\forms.py:10
+msgid "Nombre"
+msgstr "Name"
+
+#: .\forms.py:11
+msgid "Localización"
+msgstr "Location"
+
+#: .\forms.py:12
+msgid "Localidad"
+msgstr "City"
+
+#: .\forms.py:13
+msgid "Provincia"
+msgstr "Province"
+
+#: .\forms.py:14
+msgid "Comunidad autónoma"
+msgstr "Community"
+
+#: .\forms.py:15
+msgid "Tipo de yacimiento"
+msgstr "Type of archaeological site"
+
+#: .\forms.py:16
+msgid "Fase histórica"
+msgstr "Historical phase"
+
+#: .\forms.py:17
+msgid "Observaciones"
+msgstr "Remarks"
+
+#: .\templates\mapviewer\base.html:23
+msgid "Proyecto Rusko"
+msgstr "Rusko project"
+
+#: .\templates\mapviewer\base.html:31
+msgid "Yacimientos"
+msgstr "Archaeological sites"
+
+#: .\templates\mapviewer\base.html:34
+msgid "Listado de yacimientos"
+msgstr "Site list"
+
+#: .\templates\mapviewer\base.html:35
+msgid "Crear yacimiento"
+msgstr "Create site"
+
+#: .\templates\mapviewer\base.html:46
+msgid "Editar perfil"
+msgstr "Change profile"
+
+#: .\templates\mapviewer\base.html:48
+msgid "Cerrar sesión"
+msgstr "Logout"
+
+#: .\templates\mapviewer\base.html:53
+msgid "Iniciar sesión"
+msgstr "Login"
+
+#: .\templates\mapviewer\detalle_marcador.html:8
+#: .\templates\mapviewer\listado_marcadores.html:14
+msgid "Creado por"
+msgstr "Created by"
+
+#: .\templates\mapviewer\detalle_marcador.html:13
+#: .\templates\mapviewer\editar_marcador.html:6
+msgid "Editar yacimiento"
+msgstr "Update archaeological site"
+
+#: .\templates\mapviewer\editar_marcador.html:9
+msgid "Guardar"
+msgstr "Save"

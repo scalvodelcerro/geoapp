@@ -1,0 +1,65 @@
+{% load static i18n %}
+<html>
+<head>
+<title>GeoApp Django</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script
+	src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Knewave">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.1.1/css/all.css">
+<link rel="stylesheet" type="text/css"
+	href="{% static 'css/style.css' %}">
+</head>
+<body>
+	<div class="app-header">
+		<h1 class="p-3">
+			<a href="/">{% trans "Proyecto Rusko" %}</a>
+		</h1>
+		<nav class="app-menu navbar navbar-expand-lg navbar-dark bg-dark">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<div class="nav-item dropdown dropdown-dark">
+						<button class="btn btn-secondary dropdown-toggle" id="navbarDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-university"></i>{% trans "Yacimientos" %}
+						</button>
+						<div class="dropdown-menu bg-dark text-light" aria-labelledby="navbarDropdown">						
+							<a class="dropdown-item" href="/yacimiento/buscador"><i class="fas fa-search"></i>{% trans "Buscador" %}</a>
+							<a class="dropdown-item" href="/"><i class="fas fa-atlas"></i>{% trans "Listado" %}</a>
+		   					<a class="dropdown-item" href="/yacimiento/nuevo"><i class="fas fa-map-marked-alt"></i>{% trans "Crear yacimiento" %}</a>
+						</div>
+					</div>	
+				</li>
+			</ul>
+			{% if user.is_authenticated %}		
+				<div class="nav-item dropdown">
+					<button class="btn btn-secondary dropdown-toggle" id="navbarDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fas fa-user"></i>{{ user.username }}
+					</button>
+					<div class="dropdown-menu dropdown-menu-right bg-dark text-light" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="#"><i class="fas fa-edit"></i>{% trans "Editar perfil" %}</a>
+	   					<div class="dropdown-divider"></div>					
+						<a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>{% trans "Cerrar sesión" %}</a>
+					</div>
+				</div>			
+			{% else %}
+				<div class="nav-item">
+					<a class="btn btn-secondary" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i>{% trans "Iniciar sesión" %}</a>
+				</div>
+			{% endif %}
+		</nav>
+	</div>
+	<div class="d-flex">
+		<div id="app-content" class="container">
+			{% block content %}
+			{% endblock %}
+		</div>
+	</div>
+</body>
+</html>

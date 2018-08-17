@@ -1,0 +1,18 @@
+{% extends 'mapviewer/base.html' %}
+{% load i18n %}
+
+{% block content %}
+	<div class="listado">
+		{% for yacimiento in yacimientos %}
+		<div class="yacimiento">
+			<h4>
+				<a href="{% url 'detalle_yacimiento' pk=yacimiento.pk %}">
+					<i class="fas fa-map-marker-alt"></i>
+					{{ yacimiento.nombre }}
+				</a>					
+			</h4>
+			<div class="subtitulo">{% trans "Creado por" %}: {{ yacimiento.usuario }}</div>
+		</div>
+		{% endfor %}
+	</div>
+{% endblock %}

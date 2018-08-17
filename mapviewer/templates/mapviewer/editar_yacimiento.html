@@ -1,0 +1,50 @@
+{% extends 'mapviewer/base.html' %}
+{% load i18n %}
+
+{% block content %}
+	{{ form.media }}
+	<h2>{% trans "Editar yacimiento" %}</h2>
+	<form method="POST" class="yacimiento-form">{% csrf_token %}
+		<table>
+			{{ form.as_table }}
+		</table>
+		<button type="submit" class="btn btn btn-outline-success btn-guardar">{% trans "Guardar" %}</button>
+	</form>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script>
+		$("#id_comunidad_autonoma").change(function () {
+			var comunidadAutonomaId = $(this).val(); 
+			$.when(
+				$.ajax({                      
+					url: '{% url 'opciones_provincia' %}',                    
+					data: {
+						'comunidad-autonoma-id': comunidadAutonomaId       
+					},
+				}),
+				$.ajax({                      
+					url: '{% url 'opciones_municipio' %}',                    
+					data: {
+						'provincia-id': ''       
+					},
+				})
+			)
+			.done(function(optionsProvincia, optionsMunicipio) {
+				$("#id_provincia").html(optionsProvincia);
+				$("#id_municipio").html(optionsMunicipio);
+			});
+		});
+		$("#id_provincia").change(function () {
+			var url = '{% url 'opciones_municipio' %}';
+			var provinciaId = $(this).val(); 
+			$.ajax({                      
+				url: '{% url 'opciones_municipio' %}',                    
+				data: {
+					'provincia-id': provinciaId       
+				},
+			})
+			.done(function(optionsMunicipio) {
+				$("#id_municipio").html(optionsMunicipio);
+			});		
+		});
+	</script>
+{% endblock %}

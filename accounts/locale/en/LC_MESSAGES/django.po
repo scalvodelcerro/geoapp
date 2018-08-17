@@ -1,0 +1,52 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-27 14:28+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\templates\registration\login.html:7
+msgid "Usuario y/o contraseña incorrectos. Inténtelo de nuevo"
+msgstr "Wrong user/password. Please try again."
+
+#: .\templates\registration\login.html:12
+msgid "El usuario no tiene permisos para acceder a la página"
+msgstr "User can't access this page"
+
+#: .\templates\registration\login.html:14
+msgid "Haga login para acceder a la página"
+msgstr "Please login to see the page"
+
+#: .\templates\registration\login.html:21
+#: .\templates\registration\signup.html:10
+msgid "Aceptar"
+msgstr "Confirm"
+
+#: .\templates\registration\login.html:25
+msgid "¿Nuevo usuario?"
+msgstr "New user?"
+
+#: .\templates\registration\login.html:26
+msgid "Regístrate"
+msgstr "Signup"
+
+#: .\templates\registration\login.html:29
+msgid "¿Has olvidado tu contraseña?"
+msgstr "Forgot your password?"
+
+#: .\templates\registration\signup.html:6
+msgid "Registro de usuario"
+msgstr "User signup"

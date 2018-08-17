@@ -1,0 +1,32 @@
+{% extends 'mapviewer/base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+{% if form.errors %}
+<p>{% trans "Usuario y/o contraseña incorrectos. Inténtelo de nuevo" %}</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>{% trans "El usuario no tiene permisos para acceder a la página" %}</p>
+    {% else %}
+    <p>{% trans "Haga login para acceder a la página" %}</p>
+    {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+	{% csrf_token %}	
+	{{ form.as_p }}	
+	<button type="submit">{% trans "Aceptar" %}</button>
+</form>
+<ul>
+	<li>
+		{% trans "¿Nuevo usuario?" %}
+		<a href="{% url 'signup' %}">{% trans "Regístrate" %}</a>
+	</li>
+	<li>
+		<a href="{% url 'password_reset' %}">{% trans "¿Has olvidado tu contraseña?" %}</a>
+	</li>	
+</ul>
+{% endblock %}

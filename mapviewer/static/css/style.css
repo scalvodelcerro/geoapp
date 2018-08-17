@@ -1,0 +1,106 @@
+form .errorlist {
+	color: darkred;	
+}
+
+h1, h2, h3, h4 {
+	font-family : 'Knewave'
+}
+
+label[for^="id_"] {
+	float: right;
+    margin-bottom: 0;
+}
+
+#app-content {	
+    width: 100%
+/*     height: calc(100vh - 170px); */
+/*     padding: 20px; */
+/*     min-height: 100vh; */
+/*     transition: all 0.3s; */
+/*     position: absolute; */
+/*     top: 0; */
+/*     right: 0; */
+}
+
+#buscador-sidebar {
+    width: 250px;
+    position: fixed;
+/*     top: 0; */
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    background: lightgoldenrodyellow;
+    color: #343a40;
+/*     transition: all 0.3s; */
+	padding: 5px;
+}
+
+#buscador-sidebar .collapse>li {
+	font-size: 0.8em;
+}
+
+#buscador-resultados {
+	width: calc(100% - 250px);
+    height: calc(100% - 190px);	
+    padding: 20px;
+/*     min-height: 100vh; */
+/*     transition: all 0.3s; */
+    position: absolute;
+/*     top: 0; */
+    right: 0;
+}
+
+#buscador-resultados #map {
+/* 	height: 100px; */
+}
+
+.app-header {
+	background: linear-gradient(to bottom right, darkgreen, lightgreen);
+}
+
+.app-header a {
+	color: white;
+}
+
+.app-header a:hover {
+	color: lightgray;
+	text-decoration: none;
+}
+
+.listado .marcador {
+	border-bottom: 3px double darkgreen;
+	margin-bottom: 5px;
+}
+.listado .marcador a:hover {
+    color: lightgray;
+    text-decoration: none;
+}
+.listado .marcador a {
+    color: darkgray;
+}
+
+.yacimiento #map {
+	height: 300px;
+}
+
+.yacimiento-form input, .yacimiento-form textarea {
+	width: 100%
+}
+
+.yacimiento-form textarea {
+    height: 120px;
+}
+
+.yacimiento-form .btn-guardar {
+	float: right;
+	clear: both;
+}
+
+.yacimiento .yacimiento-details .nombre-campo {
+	font-weight: bold;
+	font-size: 0.8em;
+}
+
+.subtitulo {
+	font-size: small;
+}

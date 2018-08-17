@@ -1,0 +1,97 @@
+{% extends 'mapviewer/base.html' %}
+{% load i18n %}
+{% load l10n %}
+
+{% block content %}
+	<div class="yacimiento">
+		<div class="d-flex yacimiento-header">
+			<h3 class="p-2 mr-auto">{{ yacimiento.nombre }}</h3>
+			<div class="p-2 opciones">
+				{% if user == yacimiento.usuario %}
+					<a role="button" href="{% url 'editar_yacimiento' pk=yacimiento.pk %}" class="btn btn-primary">
+						<i class="fas fa-pencil-alt"></i>
+					</a>
+				{% endif %}
+			</div>
+		</div>
+		<p class="subtitulo">{% trans "Creado por" %}: {{ yacimiento.usuario }}</p>
+		<div class="container yacimiento-details">
+			<div id="map" class="row map"></div>
+			<div class="row">
+				<span class="col-md-2 nombre-campo">{% trans "Comunidad Autónoma" %}:</span>
+				<span class="col-md">{{ yacimiento.comunidad_autonoma.nombre }}</span>
+			</div>
+			<div class="row">
+				<span class="col-md-2 nombre-campo">{% trans "Provincia" %}:</span>
+				<span class="col-md">{{ yacimiento.provincia.nombre }}</span>
+			</div>
+			<div class="row">
+				<span class="col-md-2 nombre-campo">{% trans "Municipio" %}:</span>
+				<span class="col-md">{{ yacimiento.municipio.nombre }}</span>
+			</div>
+			<div class="row">
+				<span class="col-md-2 nombre-campo">{% trans "Observaciones" %}:</span>
+				<span class="col-md">{{ yacimiento.observaciones }}</span>
+			</div>			
+		</div>
+	</div>
+	<script
+		src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.1.3/build/ol.js"></script>
+	<script type="text/javascript">
+		var vectorSource = new ol.source.Vector();
+		vectorSource.on('change', function(evt){
+			if (vectorSource.getState() === 'ready') {
+				if (vectorSource.getFeatures().length > 0) {
+					map.getView().fit(vectorSource.getExtent(), map.getSize());
+				}
+			}
+		});
+		var styleFunction = function(feature) {
+			if (feature.getGeometry().getType() == 'Polygon') {
+				return new ol.style.Style({
+					stroke :  new ol.style.Stroke({
+						color : 'darkgreen',
+						width : 2
+					}),
+					fill : new ol.style.Fill({
+						color : [0, 200, 0, 0.4]
+					}),
+				});
+			} else if (feature.getGeometry().getType() == 'Point') {
+				return new ol.style.Style({
+					image: new ol.style.Circle(/** @type {olx.style.IconOptions} */ ({
+		 				stroke : new ol.style.Stroke({
+		 					color : 'darkred'
+		 				}),	
+		 				fill : new ol.style.Fill({
+		 					color : 'red'
+		 				}),
+		 				radius : 4,
+		 			}))
+				});
+			}
+		};
+		var map = new ol.Map({
+			target : 'map',
+			layers : [
+				new ol.layer.Tile({
+					source : new ol.source.OSM()
+				}),
+				new ol.layer.Vector({
+					source: vectorSource,
+					style: styleFunction
+				}),
+			],
+			view: new ol.View({
+				center: [0, 0],
+		        zoom: 1
+		    })
+		});
+		vectorSource.addFeatures(
+			(new ol.format.GeoJSON()).readFeatures({{ yacimiento.localizacion.geojson|safe }}, {
+			dataProjection: 'EPSG:4326',
+			featureProjection: 'EPSG:3857'
+			})
+		);
+	</script>
+{% endblock %}
